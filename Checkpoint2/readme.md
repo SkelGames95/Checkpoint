@@ -13,4 +13,4 @@ a false ok
 5. Gestire i possibili errori della chiamata ok
 Punti opzionali:
 1. Creare 2 <p> in cui stampare le informazioni a e b del punto 3 e una lista <ul> in
-cui, per ogni <li>, stampare le abilità del Pokemon
+cui, per ogni <li>, stampare le abilità del Pokemon ok 
