@@ -3,28 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
+    <h1></h1>
     <p id="pok1"></p>
     <p id="pok2"></p>
+    <ul>
+
+    </ul>
     <script>
-        let p 
-        async function Pikachu(){
-            let getPikachu = await fetch ("https://pokeapi.co/api/v2/pokemon/pikachu");
-            const jsonPikachu = await getPikachu.json();
-            //console.log(jsonPikachu)
-            let objPikachu = {name: jsonPikachu.name, base_experience: jsonPikachu.base_experience, abilities: jsonPikachu.abilities};
-            //console.log(objPikachu.abilities);
+        const title = document.querySelector("h1");
+        const pokémon = "Pikachu";
+        title.innerHTML = pokémon;
+        async function dataPikachu() {
+            const p1 = document.querySelector("p");
+            const p2 = document.getElementById("pok2");
+            const list = document.querySelector("ul");
+            try {
+                const getPikachu = await fetch ("https://pokeapi.co/api/v2/pokemon/pikachu");
+                jsonPikachu = await getPikachu.json();
+            } catch(err) {
+                console.error("Error fetching data!", err);
+            }
+            const objPikachu = {name: jsonPikachu.name, base_experience: jsonPikachu.base_experience, abilities: jsonPikachu.abilities};
+            console.log(objPikachu);
             objPikachu.abilities.forEach((el) => {
                 if (el.is_hidden == false){
                     console.log(el);
                 }
             });
+            p1.innerHTML = objPikachu.name;
+            p2.innerHTML = objPikachu.base_experience;
+            objPikachu.abilities.forEach((el) => {
+                let li = document.createElement("li");
+                li.innerHTML = `${el.ability.name}`;
+                list.appendChild(li);
+            })
         }
         
-        Pikachu();
+        dataPikachu();
     </script>
 </body>
 </html>
