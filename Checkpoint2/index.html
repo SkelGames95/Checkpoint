@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <p id="pok1"></p>
+    <p id="pok2"></p>
+    <script>
+        let p 
+        async function Pikachu(){
+            let getPikachu = await fetch ("https://pokeapi.co/api/v2/pokemon/pikachu");
+            const jsonPikachu = await getPikachu.json();
+            //console.log(jsonPikachu)
+            let objPikachu = {name: jsonPikachu.name, base_experience: jsonPikachu.base_experience, abilities: jsonPikachu.abilities};
+            //console.log(objPikachu.abilities);
+            objPikachu.abilities.forEach((el) => {
+                if (el.is_hidden == false){
+                    console.log(el);
+                }
+            });
+        }
+        
+        Pikachu();
+    </script>
+</body>
+</html>
