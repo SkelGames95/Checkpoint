@@ -1,2 +1,2 @@
-# Checkpoint2
-Checkpoint2 repo
+# Checkpoints
+Checkpoints repo
