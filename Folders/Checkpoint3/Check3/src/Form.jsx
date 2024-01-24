@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { useRef } from "react";
+import { Buttons } from "./Buttons";
+
 
 export const Form = () => {
     const [data, setData] = useState(() => {
@@ -28,10 +30,26 @@ export const Form = () => {
         })
     }
 
+    const handleOnSubmit = (event) => {
+        event.preventDefault();
+        setData({
+            username:'',
+            password:'',
+        })
+    }
+
+    const handleReset = () => {
+        setData({
+            username:'',
+            password:'',
+        })
+    }
+
     return (
-        <form >
-            <label>Username:<input name="user" type="text" value={data.username} onChange={handleOnChange} ref={inputRef} placeholder="Username"/></label>
-            <label>Password:<input name="password" type="password" value={data.password} onChange={handleOnChange} placeholder="Password"/></label>
+        <form onSubmit={handleOnSubmit}>
+            <img width={24} height={24} src="./icons/username.png"/><input name="username" type="text" value={data.username} onChange={handleOnChange} ref={inputRef} placeholder="Username"/><br/>
+            <img width={24} height={24} src="./icons/password.png"/><input name="password" type="password" value={data.password} onChange={handleOnChange} disabled={data.username.length < 3} placeholder="Password"/><br/><br/>
+            <Buttons onClick={handleReset} value={data}/>
         </form>
     )
 }
