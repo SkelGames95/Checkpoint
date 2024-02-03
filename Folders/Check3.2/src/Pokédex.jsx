@@ -7,6 +7,7 @@ export const Pokédex = () => {
     const [error, setError] = useState(null)
     const [input, setInput] = useState('')
     const [clickdata, setClickdata] = useState('')
+    const [collapsed, setCollapsed] = useState(true)
 
     const handleInputChange = (event) => {
         const pokename = event.target.value
@@ -21,6 +22,10 @@ export const Pokédex = () => {
         console.log(data)
     }
 
+    const handleToggle = () => {
+        setCollapsed(coll => !coll)
+
+    }
 
     async function getPoke(pokename) {
 
@@ -43,13 +48,28 @@ export const Pokédex = () => {
 
     return (
         <div>
-            <input value={input} type="text" onChange={handleInputChange} name="poke" placeholder="Search Pokémon"/> {/*add onchange */}
-            <button onClick={handleOnClick}>Search</button>
+            <input value={input.toLowerCase()} type="text" onChange={handleInputChange} name="poke" placeholder="Search Pokémon"/>
+            <button type="submit" onClick={handleOnClick}>Search</button>
             <br/>
-            <img src={data?.sprites?.front_default} />
-            <h2>{data?.name}</h2>
-            <p>{data?.base_experience}</p>
-            
+            <div className="info-section">
+                <img src={data?.sprites?.front_default} />
+                <h2>{data?.name}</h2>
+                <p>{data?.base_experience}</p>
+                {/* <p>{data && data.abilities.map(item => item.ability)}</p> */}
+                <button onClick={handleToggle}>{collapsed == true ? 'More Info' : 'Hide Info'}</button>
+            </div>
+            {!collapsed ? (
+            <div className="info-section">
+                {/* <p>{data?.egg-group}</p>
+                <p>{data?.color}</p>
+                <p>{data?.forms}</p> */}
+            </div>)
+            :
+            (<div className="info-section-collapsed">
+                {/* <p>{data?.egg-group}</p>
+                <p>{data?.color}</p>
+                <p>{data?.forms}</p> */}
+            </div>)}
         </div>
     )
 }
